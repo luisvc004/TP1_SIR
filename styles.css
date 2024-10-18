@@ -1,0 +1,115 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 0;
+    color: #fff;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #1db954;
+    border-radius: 10px;
+}
+
+header {
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.search-section {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+input {
+    width: 70%;
+    padding: 12px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    transition: border 0.3s;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    padding: 12px 20px;
+    background-color: #fff;
+    border: none;
+    color: #1db954;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #148b37;
+    transform: scale(1.05);
+}
+
+.results {
+    margin-top: 30px;
+    text-align: left;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+#spotifyData {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.track {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s;
+}
+
+.track:hover {
+    transform: scale(1.02);
+}
+
+.track img {
+    width: 60px;
+    height: 60px;
+    border-radius: 5px;
+}
+
+.track-info {
+    flex-grow: 1;
+    padding-left: 20px;
+}
+
+.track-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #212529;
+}
+
+.artist-name {
+    font-size: 1rem;
+    color: #6c757d;
+}

@@ -1,111 +1,32 @@
 <!DOCTYPE html>
-<html lang="pt-PT">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popular Artists on Spotify</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Pesquisa de Informações</h1>
-    <p>Insira um nome para obter informações relacionadas:</p>
+    <div class="container">
+        <header>
+            <h1>Discover Spotify Artists</h1>
+            <p>Enter an artist's name to explore their most popular tracks!</p>
+        </header>
 
-    <input type="text" id="searchInput" placeholder="Escreva um nome...">
-    <button onclick="example()">Pesquisar Informações</button>
+        <main>
+            <div class="search-section">
+                <input type="text" id="searchTerm" placeholder="Search for an artist..." />
+                <button id="searchBtn">Search</button>
+            </div>
 
-    <div id="results">
-        <div class="section">
-            <h2>Informações da Wikipedia</h2>
-            <div id="wikipediaInfo"></div>
-        </div>
-        <div class="section">
-            <h2>Clima Atual</h2>
-            <div id="weatherInfo"></div>
-        </div>
-        <div class="section">
-            <h2>Imagens Relacionadas</h2>
-            <div id="example"></div>
-        </div>
+            <div id="results" class="results">
+                <h2>Most Popular Songs</h2>
+                <div id="spotifyData"></div>
+            </div>
+        </main>
     </div>
 
-    <script>
-        // Função para buscar as informações das APIs
-        function buscarInformacoes() {
-            const nome = document.getElementById("nameInput").value;
-
-            if (!nome) {
-                alert("Por favor, insira um nome.");
-                return;
-            }
-
-            buscarInformacoesWikipedia(nome);
-            buscarInformacoesClima(nome);
-            buscarImagens(nome);
-        }
-
-        // Função para buscar informações da Wikipedia
-        function buscarInformacoesWikipedia(nome) {
-            const wikiUrl = `https://pt.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(nome)}`;
-
-            fetch(wikiUrl)
-                .then(response => response.json())
-                .then(data => {
-                    const wikiDiv = document.getElementById("wikipediaInfo");
-                    if (data.extract) {
-                        wikiDiv.innerHTML = `<p>${data.extract}</p>`;
-                    } else {
-                        wikiDiv.innerHTML = `<p>Não foram encontradas informações na Wikipedia.</p>`;
-                    }
-                })
-                .catch(error => {
-                    console.error("Erro ao buscar informações da Wikipedia:", error);
-                });
-        }
-
-        // Função para buscar informações de clima
-        function buscarInformacoesClima(nome) {
-            const apiKey = 'SUA_API_KEY_DO_OPENWEATHER';  // Insira a sua chave da OpenWeatherMap API aqui
-            const weatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(nome)}&appid=${apiKey}&units=metric&lang=pt`;
-
-            fetch(weatherUrl)
-                .then(response => response.json())
-                .then(data => {
-                    const weatherDiv = document.getElementById("weatherInfo");
-                    if (data.main) {
-                        weatherDiv.innerHTML = `<p>Temperatura atual em ${nome}: ${data.main.temp}°C</p>`;
-                    } else {
-                        weatherDiv.innerHTML = `<p>Não foi possível obter informações de clima para "${nome}".</p>`;
-                    }
-                })
-                .catch(error => {
-                    console.error("Erro ao buscar informações de clima:", error);
-                });
-        }
-
-        // Função para buscar imagens do Unsplash
-        function buscarImagens(nome) {
-            const apiKey = 'SUA_API_KEY_DO_UNSPLASH';  // Insira a sua chave da Unsplash API aqui
-            const unsplashUrl = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(nome)}&client_id=${apiKey}`;
-
-            fetch(unsplashUrl)
-                .then(response => response.json())
-                .then(data => {
-                    const imageDiv = document.getElementById("imageInfo");
-                    imageDiv.innerHTML = "";
-                    if (data.results.length > 0) {
-                        data.results.forEach(photo => {
-                            const img = document.createElement("img");
-                            img.src = photo.urls.small;
-                            img.alt = nome;
-                            img.style.margin = "10px";
-                            imageDiv.appendChild(img);
-                        });
-                    } else {
-                        imageDiv.innerHTML = `<p>Não foram encontradas imagens para "${nome}".</p>`;
-                    }
-                })
-                .catch(error => {
-                    console.error("Erro ao buscar imagens:", error);
-                });
-        }
-    </script>
+    <audio id="audioPlayer" controls style="display: none;"></audio>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
