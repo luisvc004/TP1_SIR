@@ -84,6 +84,7 @@ h2 {
     border-radius: 5px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s;
 }
@@ -112,4 +113,25 @@ h2 {
 .artist-name {
     font-size: 1rem;
     color: #6c757d;
+}
+
+.play-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #1db954;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    transition: color 0.3s;
+}
+
+.play-btn:hover {
+    color: #fff;
+}
+
+.play-btn:disabled {
+    cursor: not-allowed;
+    color: #ccc;
 }

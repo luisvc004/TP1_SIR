@@ -45,17 +45,46 @@ function displayTopTracks(tracks) {
                 <div class="track-name">${track.name}</div>
                 <div class="artist-name">${track.artists.map(artist => artist.name).join(', ')}</div>
             </div>
+            <button class="play-btn" ${track.preview_url ? '' : 'disabled'}>
+                <i class="fas fa-play"></i>
+            </button>
         `;
         spotifyData.appendChild(trackElement);
 
+        const playButton = trackElement.querySelector('.play-btn');
         if (track.preview_url) {
-            trackElement.addEventListener('click', () => {
-                audioPlayer.src = track.preview_url;
-                audioPlayer.play();
+            playButton.addEventListener('click', () => {
+                if (audioPlayer.src === track.preview_url) {
+                    if (!audioPlayer.paused) {
+                        audioPlayer.pause();
+                        playButton.innerHTML = '<i class="fas fa-play"></i>';
+                    } else {
+                        audioPlayer.play();
+                        playButton.innerHTML = '<i class="fas fa-pause"></i>';
+                    }
+                } else {
+                    audioPlayer.src = track.preview_url;
+                    audioPlayer.play();
+                    playButton.innerHTML = '<i class="fas fa-pause"></i>';
+
+                    const allPlayButtons = document.querySelectorAll('.play-btn');
+                    allPlayButtons.forEach(btn => {
+                        if (btn !== playButton) {
+                            btn.innerHTML = '<i class="fas fa-play"></i>';
+                        }
+                    });
+                }
             });
         } else {
-            trackElement.style.cursor = 'not-allowed';
-            trackElement.title = 'Preview not available';
+            playButton.style.cursor = 'not-allowed';
+            playButton.title = 'Preview not available';
         }
+    });
+
+    audioPlayer.addEventListener('ended', () => {
+        const allPlayButtons = document.querySelectorAll('.play-btn');
+        allPlayButtons.forEach(btn => {
+            btn.innerHTML = '<i class="fas fa-play"></i>';
+        });
     });
 }
