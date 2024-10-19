@@ -7,7 +7,11 @@ const audioPlayer = document.getElementById('audioPlayer');
 
 function fetchSpotifyData(artist) {
     const apiUrl = `https://api.spotify.com/v1/search?q=${artist}&type=artist`;
-    fetch(apiUrl, { headers: { 'Authorization': `Bearer ${myconfig.spotify.ACCESS_TOKEN}` } })
+    fetch(apiUrl, { 
+        headers: { 
+            'Authorization': `Bearer ${myconfig.spotify.ACCESS_TOKEN}` 
+        } 
+    })
         .then(response => response.json())
         .then(data => {
             const artistId = data.artists.items[0]?.id; // retrieves the ID of the first artist found in the search results. 
@@ -18,7 +22,11 @@ function fetchSpotifyData(artist) {
 
 function getArtistTopTracks(artistId) {
     const apiUrl = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=PT`; // If you change PT to another country code, you would receive the top tracks relevant to that specific market
-    fetch(apiUrl, { headers: { 'Authorization': `Bearer ${myconfig.spotify.ACCESS_TOKEN}` } })
+    fetch(apiUrl, { 
+        headers: { 
+            'Authorization': `Bearer ${myconfig.spotify.ACCESS_TOKEN}` 
+        } 
+    })
         .then(response => response.json())
         .then(data => displayTopTracks(data.tracks))
         .catch(error => console.error('Error fetching popular tracks:', error));
