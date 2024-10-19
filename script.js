@@ -1,15 +1,19 @@
 import { fetchSpotifyData } from './spotifyAPI.js';
-//import { fetchLyrics } from './geniusAPI.js';
+import { fetchLastFmData } from './lastfmAPI.js';
 
 const searchBtn = document.getElementById('searchBtn');
 const searchTerm = document.getElementById('searchTerm');
 const spotifyData = document.getElementById('spotifyData');
+const lastfmData = document.getElementById('lastfmData');
 const audioPlayer = document.getElementById('audioPlayer');
 const lyricsContainer = document.getElementById('lyrics');
 
 searchBtn.addEventListener('click', () => {
     const artist = searchTerm.value.trim();
-    if (artist) fetchSpotifyData(artist);
+    if (artist){
+        fetchSpotifyData(artist);
+        fetchLastFmData(artist);
+    }
     else alert('Please enter an artist\'s name.');
 });
 

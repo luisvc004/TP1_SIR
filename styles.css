@@ -141,3 +141,27 @@ h2 {
     border-radius: 5px;
     margin-top: 20px;
 }
+
+#lastfmData{
+    margin-top: 20px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+h4 {
+    font-size: 1.2rem;
+    margin: 5px 0;
+}
+
+p {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+#youtubeData img {
+    width: 100%;
+    max-width: 120px;
+}
