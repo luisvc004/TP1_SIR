@@ -1,5 +1,5 @@
 import { fetchSpotifyData } from './spotifyAPI.js';
-import { fetchLyrics } from './geniusAPI.js';
+//import { fetchLyrics } from './geniusAPI.js';
 
 const searchBtn = document.getElementById('searchBtn');
 const searchTerm = document.getElementById('searchTerm');
@@ -25,4 +25,4 @@ audioPlayer.addEventListener('ended', () => {
     lyricsContainer.innerHTML = '';
 });
 
-export { fetchLyrics };
+//export { fetchLyrics };

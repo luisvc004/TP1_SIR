@@ -1,4 +1,4 @@
-import { myconfig } from './myconfig.js';
+/*import { myconfig } from './myconfig.js';
 
 const lyricsContainer = document.getElementById('lyrics');
 
@@ -29,4 +29,4 @@ function displayLyrics(url) {
         .catch(error => console.error('Error displaying lyrics:', error));
 }
 
-export { fetchLyrics };
+export { fetchLyrics };*/

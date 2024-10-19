@@ -1,9 +1,8 @@
 import { myconfig } from './myconfig.js';
-import { fetchLyrics } from './geniusAPI.js';
+//import { fetchLyrics } from './geniusAPI.js';
 
 const spotifyData = document.getElementById('spotifyData');
 const audioPlayer = document.getElementById('audioPlayer');
-//const lyricsContainer = document.getElementById('lyrics');
 
 function fetchSpotifyData(artist) {
     const apiUrl = `https://api.spotify.com/v1/search?q=${artist}&type=artist`;
@@ -42,23 +41,27 @@ function displayTopTracks(tracks) {
             <div class="track-info">
                 <div class="track-name">${track.name}</div>
                 <div class="artist-name">${track.artists.map(artist => artist.name).join(', ')}</div>
+                <div class="album-name">Album: ${track.album.name}</div>
+                <div class="release-date">Release Date: ${track.album.release_date}</div>
+                <div class="popularity">Popularity: ${track.popularity}</div>
             </div>
             <button class="play-btn" ${track.preview_url ? '' : 'disabled'}>
                 <i class="fas fa-play"></i>
             </button>
         `;
         spotifyData.appendChild(trackElement);
-
-        const playButton = trackElement.querySelector('.play-btn');
-        if (track.preview_url) {
-            playButton.addEventListener('click', () => {
-                handlePlayButtonClick(track, playButton);
-            });
-        } else {
-            playButton.style.cursor = 'not-allowed';
-            playButton.title = 'Preview not available';
-        }
+        setUpPlayButton(track, trackElement);
     });
+}
+
+function setUpPlayButton(track, trackElement) {
+    const playButton = trackElement.querySelector('.play-btn');
+    if (track.preview_url) {
+        playButton.addEventListener('click', () => handlePlayButtonClick(track, playButton));
+    } else {
+        playButton.style.cursor = 'not-allowed';
+        playButton.title = 'Preview not available';
+    }
 }
 
 function handlePlayButtonClick(track, playButton) {
