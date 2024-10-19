@@ -1,5 +1,5 @@
-import { fetchSpotifyData } from '../spotifyAPI.js';
-import { fetchLastFmData } from '../lastfmAPI.js';
+import { fetchSpotifyData } from '../controllers/spotifyAPI.js';
+import { fetchLastFmData } from '../controllers/lastfmAPI.js';
 
 const searchBtn = document.getElementById('searchBtn');
 const searchTerm = document.getElementById('searchTerm');
