@@ -7,10 +7,12 @@ const spotifyData = document.getElementById('spotifyData');
 const lastfmData = document.getElementById('lastfmData');
 const audioPlayer = document.getElementById('audioPlayer');
 const lyricsContainer = document.getElementById('lyrics');
+const artistTitle = document.getElementById('artistTitle');
 
 searchBtn.addEventListener('click', () => {
     const artist = searchTerm.value.trim();
     if (artist){
+        artistTitle.innerText = `"${artist}" Most Popular Songs on Spotify`;
         fetchSpotifyData(artist);
         fetchLastFmData(artist);
     }
