@@ -10,8 +10,8 @@ export const myconfig = {
         ACCESS_TOKEN: 'u7OaSN9zh2sP1wH4qS5O6x8KqUeIXOwrBxsUz2kRLVBAoLeELvpwOrZjSn8x2RI9',
     },
     lastfm: {
-        API_KEY: 'b2e2aeee79df9d4df74c6c6ce632aa04', // Novo API key do Last.fm
-        SHARED_SECRET: 'de01174df5d5f746c4e394e6940ea480', // Novo Shared Secret do Last.fm
-        REGISTERED_TO: 'tiagopassos2' // Nome do registro
+        API_KEY: 'b2e2aeee79df9d4df74c6c6ce632aa04',
+        SHARED_SECRET: 'de01174df5d5f746c4e394e6940ea480',
+        REGISTERED_TO: 'tiagopassos2'
     }
 };
