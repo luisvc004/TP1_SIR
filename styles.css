@@ -144,3 +144,19 @@ h2 {
     margin-top: 30px;
     color: #000;
 }
+
+.listening {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
