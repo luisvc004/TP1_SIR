@@ -6,6 +6,7 @@ const searchTerm = document.getElementById('searchTerm');
 const artistTitle = document.getElementById('artistTitle');
 
 let inactivityTimeout;
+let isListening = false;
 
 function fetchArtistData(artist) {
     artistTitle.innerText = `"${artist}" Most Popular Songs on Spotify`;
@@ -28,43 +29,49 @@ searchTerm.addEventListener('keypress', (event) => {
 
 function startVoiceRecognition() {
     if (annyang) {
-        const commands = {
-            'search *term': function(term) {
-                searchTerm.value = term;
-                fetchArtistData(term);
-            },
-        };
+        if(!isListening){
+            const commands = {
+                'search *term': function(term) {
+                    searchTerm.value = term;
+                    fetchArtistData(term);
+                },
+            };
+            
+            annyang.addCommands(commands);
+            annyang.start();
 
-        annyang.addCommands(commands);
-        annyang.start();
-
-        searchTerm.value = "Listening...";
-        searchTerm.classList.add('listening');
-
-        annyang.addCallback('result', function(phrases) {
-            searchTerm.value = phrases[0];
-            fetchArtistData(phrases[0]);
+            searchTerm.value = "Listening...";
+            searchTerm.classList.add('listening');
+            isListening = true;
+            
+            annyang.addCallback('result', function(phrases) {
+                searchTerm.value = phrases[0];
+                fetchArtistData(phrases[0]);
+                resetInactivityTimeout();
+            });
+            
+            function resetInactivityTimeout() {
+                clearTimeout(inactivityTimeout);
+                inactivityTimeout = setTimeout(() => {
+                    annyang.abort();
+                    searchTerm.classList.remove('listening');
+                    searchTerm.value = '';
+                    isListening = false;
+                }, 3000);
+            }
+            
             resetInactivityTimeout();
-        });
-
-        annyang.addCallback('end', function() {
+            annyang.addCallback('start', resetInactivityTimeout);
+        
+        } else {
+            annyang.abort();
             searchTerm.classList.remove('listening');
-        });
-
-        function resetInactivityTimeout() {
-            clearTimeout(inactivityTimeout);
-            inactivityTimeout = setTimeout(() => {
-                annyang.abort();
-                searchTerm.classList.remove('listening');
-            }, 3000);
+            searchTerm.value = '';
+            isListening = false;
         }
-
-        resetInactivityTimeout();
-        annyang.addCallback('start', resetInactivityTimeout);
-
     } else {
         console.log('Annyang is not supported in this browser.');
     }
 }
 
-document.getElementById('voiceBtn').addEventListener('click', startVoiceRecognition);
+voiceBtn.addEventListener('click', startVoiceRecognition);
