@@ -1,5 +1,4 @@
 import { fetchSpotifyData } from '../spotifyAPI.js';
-import { fetchLastFmData } from '../lastfmAPI.js';
 
 const searchBtn = document.getElementById('searchBtn');
 const searchTerm = document.getElementById('searchTerm');
@@ -9,9 +8,7 @@ let inactivityTimeout;
 let isListening = false;
 
 function fetchArtistData(artist) {
-    artistTitle.innerText = `"${artist}" Most Popular Songs on Spotify`;
     fetchSpotifyData(artist);
-    fetchLastFmData(artist);
 }
 
 searchBtn.addEventListener('click', () => {
