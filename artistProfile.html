@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artist Profile</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles2.css">
 </head>
 <body>
     <div class="container artist-profile">
         <button class="back-button" onclick="window.history.back()">Voltar</button>
-        <h2 id="artistName">Artist Name</h2>
-        <div id="artistInfo"></div>
-        <div class="tracks">
-            <h3>Popular Tracks</h3>
-            <!-- Lista de músicas populares -->
+        <h2 id="artistName">Nome do Artista</h2>
+        <div id="artistInfo" class="artist-details"></div>
+        <div id="topTracks" class="tracks">
+            <h3>Músicas Populares</h3>
+            <div class="tracks-grid"></div>
         </div>
     </div>
     <script type="module" src="artistProfile.js"></script>

@@ -1,4 +1,4 @@
-import { fetchSpotifyData } from '../spotifyAPI.js'; // Certifique-se de que você tem a função fetchSpotifyData importada corretamente
+import { fetchSpotifyData } from '../spotifyAPI.js';
 
 const searchBtn = document.getElementById('searchBtn');
 const searchTerm = document.getElementById('searchTerm');
