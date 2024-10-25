@@ -2,26 +2,23 @@ import { fetchSpotifyData } from '../spotifyAPI.js';
 
 const searchBtn = document.getElementById('searchBtn');
 const searchTerm = document.getElementById('searchTerm');
-const spotifyData = document.getElementById('spotifyData'); // Adicionado para referência mais tarde
+const spotifyData = document.getElementById('spotifyData');
 let inactivityTimeout;
 let isListening = false;
 
-// Função que busca os dados do artista e exibe artistas semelhantes
 searchBtn.addEventListener('click', () => {
     const artist = searchTerm.value.trim();
     if (artist) {
-        fetchSpotifyData(artist); // Chama a função que busca os dados do artista
+        fetchSpotifyData(artist);
     } else {
         alert('Please enter an artist\'s name.');
     }
 });
 
-// Evento para permitir pesquisa ao pressionar 'Enter'
 searchTerm.addEventListener('keypress', (event) => {
     if (event.key === "Enter") searchBtn.click();
 });
 
-// Função para iniciar o reconhecimento de voz
 function startVoiceRecognition() {
     if (annyang) {
         if (!isListening) {
@@ -31,20 +28,20 @@ function startVoiceRecognition() {
                     fetchSpotifyData(term);
                 },
             };
-            
+
             annyang.addCommands(commands);
             annyang.start();
 
             searchTerm.value = "Listening...";
             searchTerm.classList.add('listening');
             isListening = true;
-            
+
             annyang.addCallback('result', function(phrases) {
                 searchTerm.value = phrases[0];
                 fetchSpotifyData(phrases[0]);
                 resetInactivityTimeout();
             });
-            
+
             function resetInactivityTimeout() {
                 clearTimeout(inactivityTimeout);
                 inactivityTimeout = setTimeout(() => {
@@ -54,10 +51,10 @@ function startVoiceRecognition() {
                     isListening = false;
                 }, 3000);
             }
-            
+
             resetInactivityTimeout();
             annyang.addCallback('start', resetInactivityTimeout);
-        
+
         } else {
             annyang.abort();
             searchTerm.classList.remove('listening');

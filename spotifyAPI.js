@@ -28,7 +28,6 @@ function fetchSpotifyData(artist) {
         });
 }
 
-// Função para exibir artistas
 function displayArtists(artists) {
     clearSpotifyData();
     artists.forEach((artist) => {
@@ -37,24 +36,21 @@ function displayArtists(artists) {
     });
 }
 
-// Limpa os dados anteriores
 function clearSpotifyData() {
     spotifyData.innerHTML = '';
 }
 
-// Cria o elemento HTML para cada artista
 function createArtistElement(artist) {
     const artistElement = document.createElement('div');
     artistElement.classList.add('artist-card');
     artistElement.innerHTML = `
-        <img src="${artist.images[0]?.url || 'placeholder.png'}" alt="${artist.name}">
+        <img src="${artist.images[0]?.url || '/images/placeholder.png'}" alt="${artist.name}">
         <div class="artist-info">
             <div class="artist-name">${artist.name}</div>
-            <button class="profile-btn" onclick="window.location.href='artistProfile.html?id=${artist.id}'">Ver Perfil</button>
+            <button class="profile-btn" onclick="window.location.href='artistProfile.html?id=${artist.id}'">View Profile</button>
         </div>
     `;
     return artistElement;
 }
 
-// Exporte a função fetchSpotifyData
 export { fetchSpotifyData, fetchSpotifyApi };

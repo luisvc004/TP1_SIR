@@ -2,15 +2,13 @@ import { myconfig } from './myconfig.js';
 
 const artistInfoDiv = document.getElementById('artistInfo');
 const artistNameElement = document.getElementById('artistName');
-const topTracksGrid = document.querySelector('.tracks-grid'); // Mudança aqui
+const topTracksGrid = document.querySelector('.tracks-grid');
 
-// Função para obter o ID do artista da URL
 function getArtistIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
     return params.get('id');
 }
 
-// Fetch principal para informações do artista
 function fetchArtistProfile(artistId) {
     const apiUrl = `https://api.spotify.com/v1/artists/${artistId}`;
     return fetch(apiUrl, {
@@ -20,7 +18,6 @@ function fetchArtistProfile(artistId) {
     }).then(response => response.json());
 }
 
-// Fetch para top tracks
 function fetchTopTracks(artistId) {
     const apiUrl = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US`;
     return fetch(apiUrl, {
@@ -30,7 +27,6 @@ function fetchTopTracks(artistId) {
     }).then(response => response.json());
 }
 
-// Exibir dados do artista
 function displayArtistProfile(artist) {
     artistNameElement.textContent = artist.name;
     artistInfoDiv.innerHTML = `
@@ -42,23 +38,20 @@ function displayArtistProfile(artist) {
     `;
 }
 
-// Exibir as músicas populares em uma grade
 function displayTopTracks(tracks) {
     topTracksGrid.innerHTML = tracks.map(track => `
         <div class="track-card">
             <div class="track-cover">
-                <img src="${track.album.images[0].url}" alt="${track.name}">
+                <img class="artist-track-img" src="${track.album.images[0].url}" alt="${track.name}">
             </div>
             <div class="track-info">
                 <p class="track-title">${track.name}</p>
                 <p class="track-album">Album: ${track.album.name}</p>
-                <button class="play-btn">▶️</button>
             </div>
         </div>
     `).join('');
 }
 
-// Inicialização da página
 document.addEventListener('DOMContentLoaded', () => {
     const artistId = getArtistIdFromUrl();
     if (artistId) {
