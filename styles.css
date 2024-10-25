@@ -160,3 +160,9 @@ h2 {
         opacity: 1;
     }
 }
+
+.current-track {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
+    transition: all 0.3s ease-in-out;
+}

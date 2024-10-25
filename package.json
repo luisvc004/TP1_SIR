@@ -1,7 +1,7 @@
 {
   "name": "tp1_sir",
   "version": "1.0.0",
-  "description": "",
+  "description": "Trabalho #1 - API Mashup",
   "main": "script.js",
   "scripts": {
     "start": "node script.js",
