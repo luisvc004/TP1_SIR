@@ -82,17 +82,40 @@ h2 {
     margin-top: 20px;
 }
 
-.track, .artist-card {
+.artist-card {
     background-color: rgba(255, 255, 255, 0.1);
     padding: 20px;
     margin: 10px 0; 
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
     display: flex; 
     align-items: center;
-    justify-content: space-between;
-    width: 96%; 
+}
+
+.artist-card img {
+    width: 50px; /* Tamanho reduzido para a lista */
+    height: 50px;
+    border-radius: 50%; /* Bordas arredondadas */
+}
+
+.artist-info {
+    flex-grow: 1;
+    padding-left: 20px;
+    display: flex;
+    justify-content: space-between; /* Para o botão ficar do lado direito */
+    align-items: center;
+}
+
+.artist-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #1db954;
+}
+.artist-image {
+    width: 120px; /* Tamanho reduzido para a página de perfil */
+    height: 120px;
+    border-radius: 50%; /* Bordas arredondadas */
+    margin-bottom: 20px; /* Espaçamento abaixo da imagem */
 }
 
 
@@ -102,9 +125,9 @@ h2 {
 }
 
 .track img, .artist-card img {
-    width: 70px;
+    width: 70px; /* Para outras partes que usam a imagem maior */
     height: 70px;
-    border-radius: 5px;
+    border-radius: 50%; /* Bordas arredondadas */
 }
 
 .track-info, .artist-info {
@@ -172,7 +195,7 @@ h2 {
     top: 20px; /* Distância do topo */
     left: 20px; /* Distância da esquerda */
     padding: 10px 15px;
-    background-color: #1db954; /* Cor de fundo */
+    background-color: #28a745; /* Cor de fundo mais visível */
     color: white; /* Cor do texto */
     border: none;
     border-radius: 5px;
@@ -182,5 +205,29 @@ h2 {
 }
 
 .back-button:hover {
-    background-color: #148b37; /* Cor do botão ao passar o mouse */
+    background-color: #218838; /* Cor do botão ao passar o mouse */
+}
+
+/* Estilo da página de perfil do artista */
+.artist-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.artist-profile img {
+    width: 120px; /* Tamanho reduzido para a página de perfil */
+    height: 120px;
+    border-radius: 50%; /* Bordas arredondadas */
+}
+
+.artist-profile h2 {
+    margin-top: 20px;
+    font-size: 2rem;
+    color: #1db954;
+}
+
+.artist-profile .bio {
+    max-width: 800px; /* Limita a largura da biografia */
 }
