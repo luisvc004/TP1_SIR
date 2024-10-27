@@ -1,2 +1,4 @@
+node_modules/
 myconfig.js
-example_flickr.html
+.env
+remove/
