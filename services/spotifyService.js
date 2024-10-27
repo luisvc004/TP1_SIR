@@ -1,4 +1,4 @@
-import { myconfig } from "../myconfig.js";
+import { myconfig } from '../myconfig.js';
 
 const SPOTIFY_ACCESS_TOKEN = myconfig.spotify.ACCESS_TOKEN;
 
