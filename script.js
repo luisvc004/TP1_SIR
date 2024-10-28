@@ -68,3 +68,4 @@ function startVoiceRecognition() {
 
 const voiceBtn = document.getElementById('voiceBtn');
 voiceBtn.addEventListener('click', startVoiceRecognition);
+

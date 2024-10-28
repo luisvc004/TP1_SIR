@@ -54,3 +54,4 @@ function createArtistElement(artist) {
 }
 
 export { fetchSpotifyData, fetchSpotifyApi };
+

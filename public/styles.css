@@ -112,27 +112,12 @@ h2 {
     color: #1db954;
 }
 
-.profile-btn {
-    padding: 8px 15px;
-    background-color: #1db954;
-    border: none;
-    color: #fff;
-    font-size: 0.9rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.profile-btn:hover {
-    background-color: #148b37;
-}
-
-.track:hover, .artist-card:hover {
+/*.track:hover, .artist-card:hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     transform: scale(1.02);
 }
 
-.track img {
+.track img, .artist-card img {
     width: 70px;
     height: 70px;
     border-radius: 5px;
@@ -143,10 +128,16 @@ h2 {
     padding-left: 20px;
 }
 
+.track-name, .artist-name {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #1db954;
+}
+
 .artist-name, .album-name, .release-date, .popularity {
     font-size: 1rem;
     color: #fff;
-}
+}*/
 
 .play-btn {
     background-color: transparent;
@@ -156,6 +147,10 @@ h2 {
     font-size: 1.5rem;
     padding: 5px;
     transition: color 0.3s;
+}
+
+.profile-btn:hover {
+    background-color: #148b37;
 }
 
 .play-btn:hover {
@@ -242,7 +237,7 @@ h2 {
     font-weight: bold;
 }
 
-.artist-details a:hover {
+artist-details a:hover {
     color: #148b37;
 }
 
@@ -293,19 +288,4 @@ h2 {
 .track-album {
     font-size: 0.9rem;
     color: #ccc;
-}
-
-.play-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: #1db954;
-    font-size: 1.5rem;
-    padding: 5px;
-    transition: color 0.3s;
-    align-self: center;
-}
-
-.play-btn:hover {
-    color: #fff;
 }
