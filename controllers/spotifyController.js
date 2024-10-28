@@ -9,8 +9,18 @@ export async function handleArtistSearch(artist) {
     }
 }
 
+/*export async function loadAlbumTracks(albumId) {
+    try {
+        const tracks = await getTracksFromAlbum(albumId);
+        displayTracks(tracks);
+    } catch (error) {
+        console.error('Error fetching album tracks:', error);
+    }
+}*/
+
 export async function getArtistData(artistId) {
     const artist = await fetchArtistProfile(artistId);
     const topTracks = await fetchTopTracks(artistId);
+    //const albums = await fetchAlbums(artistId);
     return { artist, topTracks: topTracks.tracks };
 }
