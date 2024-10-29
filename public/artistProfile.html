@@ -9,13 +9,18 @@
 <body>
     <div class="container artist-profile">
         <button class="back-button" onclick="window.history.back()">Back</button>
+        
         <h2 id="artistName">Artist Name</h2>
         <div id="artistInfo" class="artist-details"></div>
-        <div id="topTracks" class="tracks">
-            <h3>Popular Songs</h3>
-            <div class="tracks-grid"></div>
-        </div>
+        
+        <section>
+            <h3 class="popular-albums-title">Popular Albums</h3>
+            <div id="albumsContainer" class="albums-grid"></div>
+        </section>
+        
+        <button id="loadMoreButton" class="preview-button load-more-btn">See More</button>
     </div>
+
     <script type="module" src="artistProfile.js"></script>
 </body>
 </html>

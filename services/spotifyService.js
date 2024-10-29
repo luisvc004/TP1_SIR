@@ -8,14 +8,17 @@ async function refreshAccessToken() {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
-            grant_type: 'refresh_token',
+            grant_type: 'client_credentials',
             refresh_token: REFRESH_TOKEN,
             client_id: CLIENT_ID,
             client_secret: CLIENT_SECRET,
         }),
     });
 
-    if (!response.ok) throw new Error('Failed to refresh access token');
+    if (!response.ok) {
+        console.error('Error refreshing access token:', response.statusText);
+        throw new Error('Could not refresh access token.');
+    }
 
     const { access_token } = await response.json();
     SPOTIFY_ACCESS_TOKEN = access_token;
@@ -59,6 +62,12 @@ export async function fetchTopTracks(artistId) {
 export async function fetchAlbums(artistId) {
     const apiUrl = `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&market=US`;
     return fetchSpotifyApi(apiUrl);
+}
+
+export async function getAlbumTracks(albumId) {
+    const apiUrl = `https://api.spotify.com/v1/albums/${albumId}/tracks`;
+    const response = await fetchSpotifyApi(apiUrl);
+    return response;
 }
     
 export async function fetchArtistData(artist) {

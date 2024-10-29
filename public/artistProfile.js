@@ -2,8 +2,12 @@ import { getArtistData } from '../controllers/spotifyController.js';
 
 const artistInfoDiv = document.getElementById('artistInfo');
 const artistNameElement = document.getElementById('artistName');
-const topTracksGrid = document.querySelector('.tracks-grid');
+const albumsContainer = document.getElementById('albumsContainer');
+const loadMoreButton = document.getElementById('loadMoreButton');
 const spotifyData = document.getElementById('spotifyData');
+
+let displayedAlbums = 0;
+const ALBUMS_PER_PAGE = 10;
 
 function getArtistIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -42,36 +46,61 @@ function displayArtistProfile(artist) {
         <p><strong>Followers:</strong> ${artist.followers.total.toLocaleString()}</p>
         <p><strong>Genres:</strong> ${artist.genres.join(', ')}</p>
         <p><strong>Popularity:</strong> ${artist.popularity}</p>
-       <p><strong>Spotify Profile:</strong> <a href="${artist.external_urls.spotify}" target="_blank">Open in Spotify</a></p>
+        <p><strong>Spotify Profile:</strong> <a href="${artist.external_urls.spotify}" target="_blank">Open in Spotify</a></p>
     `;
 }
 
-function displayTopTracks(tracks) {
-    topTracksGrid.innerHTML = tracks.map(track => `
-        <div class="track-card">
-            <div class="track-cover">
-                <img class="artist-track-img" src="${track.album.images[0].url}" alt="${track.name}">
+function displayAlbums(albums) {
+    const albumsToDisplay = albums.slice(displayedAlbums, displayedAlbums + (displayedAlbums === 0 ? 5 : ALBUMS_PER_PAGE));
+    displayedAlbums += albumsToDisplay.length;
+
+    const albumHTML = albumsToDisplay.map(album => `
+        <div class="album-card">
+            <div class="album-cover">
+                <img class="artist-album-img" src="${album.images[0]?.url || placeholderImg}" alt="${album.name}">
             </div>
-            <div class="track-info">
-                <p class="track-title">${track.name}</p>
-                <p class="track-album">Album: ${track.album.name}</p>
+            <div class="album-info">
+                <p class="album-title">${album.name}</p>
+                <p class="album-release-date">Release Date: ${album.release_date}</p>
+                <p class="album-total-tracks">Total Tracks: ${album.total_tracks}</p>
+                <button class="preview-button" onclick="window.location.href='albumDetails.html?albumId=${album.id}'">View Tracks</button>
             </div>
         </div>
     `).join('');
+
+    albumsContainer.insertAdjacentHTML('beforeend', albumHTML);
+
+    if (displayedAlbums >= albums.length) {
+        loadMoreButton.style.display = 'none';
+    }
+}
+
+async function loadMoreAlbums() {
+    const artistId = getArtistIdFromUrl();
+    try {
+        const { albums } = await getArtistData(artistId);
+        displayAlbums(albums);
+    } catch (error) {
+        console.error('Error fetching more albums:', error);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
     const artistId = getArtistIdFromUrl();
     if (artistId && artistInfoDiv) {
         try {
-            const { artist, topTracks } = await getArtistData(artistId);
+            const { artist, albums } = await getArtistData(artistId);
             displayArtistProfile(artist);
-            displayTopTracks(topTracks);
+            displayAlbums(albums);
         } catch (error) {
             console.error('Error fetching artist data:', error);
             artistInfoDiv.innerHTML = '<p>Error loading artist data.</p>';
         }
     } else if (artistInfoDiv) {
         artistInfoDiv.innerHTML = '<p>Artist ID not found.</p>';
+    }
+
+    if (loadMoreButton) {
+        loadMoreButton.addEventListener('click', loadMoreAlbums);
     }
 });

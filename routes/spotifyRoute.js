@@ -1,5 +1,5 @@
 import express from 'express';
-import { handleArtistSearch, getArtistData } from '../controllers/spotifyController.js';
+import { handleArtistSearch, getArtistData, getAlbumDetails } from '../controllers/spotifyController.js';
 
 const router = express.Router();
 
@@ -23,6 +23,16 @@ router.get('/artist/:id', async (req, res) => {
         res.json(artistData);
     } catch (error) {
         res.status(500).json({ error: 'Error retrieving artist data.' });
+    }
+});
+
+router.get('/album/:id', async (req, res) => {
+    const albumId = req.params.id;
+    try {
+        const albumData = await getAlbumDetails(albumId);
+        res.json(albumData);
+    } catch (error) {
+        res.status(500).json({ error: 'Error fetching album details' });
     }
 });
 

@@ -1,4 +1,4 @@
-import { fetchArtistData, fetchArtistProfile, fetchTopTracks } from '../services/spotifyService.js';
+import { fetchArtistData, fetchArtistProfile, fetchAlbums, getAlbumTracks } from '../services/spotifyService.js';
 
 export async function handleArtistSearch(artist) {
     try {
@@ -9,18 +9,18 @@ export async function handleArtistSearch(artist) {
     }
 }
 
-/*export async function loadAlbumTracks(albumId) {
-    try {
-        const tracks = await getTracksFromAlbum(albumId);
-        displayTracks(tracks);
-    } catch (error) {
-        console.error('Error fetching album tracks:', error);
-    }
-}*/
-
 export async function getArtistData(artistId) {
     const artist = await fetchArtistProfile(artistId);
-    const topTracks = await fetchTopTracks(artistId);
-    //const albums = await fetchAlbums(artistId);
-    return { artist, topTracks: topTracks.tracks };
+    const albums = await fetchAlbums(artistId);
+    return { artist, albums: albums.items };
+}
+
+export async function getAlbumDetails(albumId) {
+    try {
+        const { items: tracks } = await getAlbumTracks(albumId);
+        return { tracks };
+    } catch (error) {
+        console.error('Error retrieving album details:', error);
+        throw error;
+    }
 }
