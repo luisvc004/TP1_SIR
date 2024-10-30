@@ -33,11 +33,9 @@ body {
 
 .playlists h2 {
     font-size: 2rem;
-    justify-content: center;
-    margin-bottom: 30px;
+    margin: 10px 0 30px;
     color: #1db954;
     text-align: center;
-    margin-top: 10px;
 }
 
 #playlistsList {
@@ -236,14 +234,11 @@ h2 {
 }
 
 @keyframes pulse {
-    0% {
+    0%, 100% {
         opacity: 1;
     }
     50% {
         opacity: 0.5;
-    }
-    100% {
-        opacity: 1;
     }
 }
 
@@ -322,7 +317,7 @@ h2 {
     background-color: rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: all 0.2s ease-in-out;
+    transition: transform 0.2s ease-in-out;
     justify-content: space-between;
 }
 
@@ -351,12 +346,34 @@ h2 {
     font-weight: bold;
 }
 
-.track-album {
+.track-album, .track-duration {
     font-size: 0.9rem;
+}
+
+.track-album {
     color: #aaa;
 }
 
 .track-duration {
-    font-size: 0.9rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+.track-actions {
+    display: flex;
+    align-items: center;
+}
+
+.play-btn, .favorite-btn {
+    margin-left: 5px;
+    background: transparent;
+    border: none;
+    color: #1db954;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.play-btn:hover, .favorite-btn:hover {
     color: #fff;
 }
