@@ -56,7 +56,8 @@ export async function fetchArtistProfile(artistId) {
 
 export async function fetchTopTracks(artistId) {
     const apiUrl = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US`;
-    return fetchSpotifyApi(apiUrl);
+    const data = await fetchSpotifyApi(apiUrl);
+    return data.tracks;
 }
 
 export async function fetchAlbums(artistId) {

@@ -1,4 +1,4 @@
-import { fetchArtistData, fetchArtistProfile, fetchAlbums, getAlbumTracks } from '../services/spotifyService.js';
+import { fetchArtistData, fetchArtistProfile, fetchTopTracks, fetchAlbums, getAlbumTracks } from '../services/spotifyService.js';
 
 export async function handleArtistSearch(artist) {
     try {
@@ -11,8 +11,9 @@ export async function handleArtistSearch(artist) {
 
 export async function getArtistData(artistId) {
     const artist = await fetchArtistProfile(artistId);
+    const tracks = await fetchTopTracks(artistId);
     const albums = await fetchAlbums(artistId);
-    return { artist, albums: albums.items };
+    return { artist, tracks, albums: albums.items };
 }
 
 export async function getAlbumDetails(albumId) {
