@@ -6,30 +6,32 @@ let SPOTIFY_ACCESS_TOKEN = myconfig.spotify.ACCESS_TOKEN;
 async function refreshAccessToken() {
     const response = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Authorization': 'Basic ' + btoa(`${CLIENT_ID}:${CLIENT_SECRET}`)
+        },
         body: new URLSearchParams({
-            grant_type: 'client_credentials',
+            grant_type: 'refresh_token',
             refresh_token: REFRESH_TOKEN,
-            client_id: CLIENT_ID,
-            client_secret: CLIENT_SECRET,
         }),
     });
 
     if (!response.ok) {
-        console.error('Error refreshing access token:', response.statusText);
+        const errorMessage = await response.text();
+        console.error('Error refreshing access token:', response.statusText, errorMessage);
         throw new Error('Could not refresh access token.');
     }
 
     const { access_token } = await response.json();
     SPOTIFY_ACCESS_TOKEN = access_token;
+    return access_token;
 }
 
 async function fetchSpotifyApi(apiUrl) {
-    
     if (!SPOTIFY_ACCESS_TOKEN) {
         await refreshAccessToken();
     }
-    
+
     const response = await fetch(apiUrl, {
         headers: {
             'Authorization': `Bearer ${SPOTIFY_ACCESS_TOKEN}`
@@ -37,15 +39,16 @@ async function fetchSpotifyApi(apiUrl) {
     });
 
     if (response.status === 401) {
-        try {
-            await refreshAccessToken();
-            return fetchSpotifyApi(apiUrl);
-        } catch (error) {
-            console.error('Error refreshing access token:', error.message);
-            throw new Error('Could not refresh access token.');
-        }
+        await refreshAccessToken();
+        return fetchSpotifyApi(apiUrl);
     }
 
+    if (!response.ok) {
+        const errorMessage = await response.text();
+        console.error('Error fetching data:', response.status, errorMessage);
+        throw new Error(`Error fetching data: ${response.statusText}`);
+    }
+    
     return await response.json();
 }
 
