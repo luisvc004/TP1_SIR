@@ -65,10 +65,14 @@ export async function fetchAlbums(artistId) {
     return fetchSpotifyApi(apiUrl);
 }
 
-export async function getAlbumTracks(albumId) {
-    const apiUrl = `https://api.spotify.com/v1/albums/${albumId}/tracks`;
-    const response = await fetchSpotifyApi(apiUrl);
-    return response;
+export async function fetchAlbumDetails(albumId) {
+    const apiUrl = `https://api.spotify.com/v1/albums/${albumId}`;
+    const albumData = await fetchSpotifyApi(apiUrl);
+    
+    const albumName = albumData.name;
+    const tracks = albumData.tracks.items;
+
+    return { name: albumName, tracks };
 }
     
 export async function fetchArtistData(artist) {

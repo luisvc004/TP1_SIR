@@ -16,7 +16,8 @@ body {
 }
 
 .container {
-    width: 1000px;
+    width: 90%;
+    max-width: 1000px;
     padding: 40px;
     background-color: rgba(20, 20, 20, 0.9);
     border-radius: 15px;
@@ -24,6 +25,12 @@ body {
     text-align: center;
     position: relative;
     overflow: hidden;
+}
+
+.back-container {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
 }
 
 .back-button {
@@ -34,17 +41,15 @@ body {
     border-radius: 10px;
     cursor: pointer;
     font-size: 1rem;
-    position: relative;
-    overflow: hidden;
-    transition: color 0.3s, transform 0.3s;
+    transition: all 0.3s;
 }
 
 .back-button:hover {
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.05);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .album-title {
-    margin: 20px 0;
     font-size: 2.5rem;
     font-weight: bold;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
@@ -80,6 +85,13 @@ body {
     padding-left: 10px;
 }
 
+.track-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
 .play-btn {
     background-color: transparent;
     border: none;
@@ -88,7 +100,7 @@ body {
     font-size: 1.5rem;
     padding: 5px;
     margin-right: 15px;
-    transition: color 0.3s;
+    transition: color 0.3s, transform 0.3s;
 }
 
 .play-btn:hover {
@@ -125,6 +137,7 @@ body {
 .playlist-item {
     padding: 10px 15px;
     cursor: pointer;
+    transition: background 0.2s;
 }
 
 .playlist-item:hover {
@@ -170,5 +183,10 @@ body {
 
     .album-title {
         font-size: 2rem;
+    }
+
+    .track-image {
+        width: 40px;
+        height: 40px;
     }
 }

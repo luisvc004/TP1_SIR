@@ -10,11 +10,11 @@ const audioPlayer = new Audio();
 let isPlaying = false;
 let currentTrackIndex = -1;
 
-const playlists = [
+/*const playlists = [
     { id: 1, name: "Minha Playlist 1" },
     { id: 2, name: "Minha Playlist 2" },
     { id: 3, name: "Minha Playlist 3" }
-];
+];*/
 
 function getArtistIdFromUrl() {
     const params = new URLSearchParams(window.location.search);
@@ -73,13 +73,13 @@ function displayTracks(tracks) {
                     <button class="add-to-playlist-btn" data-track-id="${track.id}">
                         <i class="fas fa-plus"></i>
                     </button>
-                    <div class="playlist-dropdown" style="display: none;">
+                    ${'' /* <div class="playlist-dropdown" style="display: none;">
                         ${playlists.map(playlist => `
                             <div class="playlist-item" data-playlist-id="${playlist.id}">
                                 ${playlist.name}
                             </div>
                         `).join('')}
-                    </div>
+                    </div> */} 
                 </div>
             </div>
         </div>
@@ -94,17 +94,17 @@ function displayTracks(tracks) {
         button.addEventListener('click', () => handlePlayButtonClick(tracks[index], button, index));
     });
 
-    const addToPlaylistButtons = tracksContainer.querySelectorAll('.add-to-playlist-btn');
+    /*const addToPlaylistButtons = albumTracksContainer.querySelectorAll('.add-to-playlist-btn');
     addToPlaylistButtons.forEach((button, index) => {
         button.addEventListener('click', (event) => {
             const dropdown = event.currentTarget.nextElementSibling;
             dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
             addPlaylistSelectionEvent(dropdown, tracks[index]);
         });
-    });
+    });*/
 }
 
-function addPlaylistSelectionEvent(dropdown, track) {
+/*function addPlaylistSelectionEvent(dropdown, track) {
     const playlistItems = dropdown.querySelectorAll('.playlist-item');
     playlistItems.forEach(item => {
         item.addEventListener('click', () => {
@@ -112,7 +112,7 @@ function addPlaylistSelectionEvent(dropdown, track) {
             dropdown.style.display = 'none';
         });
     });
-}
+}*/
 
 function handlePlayButtonClick(track, playButton, index) {
     if (audioPlayer.src === track.preview_url && isPlaying) {
@@ -144,7 +144,7 @@ function updatePlayButton(playButton, isPlaying) {
     playButton.innerHTML = isPlaying ? '<i class="fas fa-pause"></i>' : '<i class="fas fa-play"></i>';
 }
 
-function addToPlaylist(trackName, playlistId) {
+/*function addToPlaylist(trackName, playlistId) {
     const notification = document.getElementById('notification');
     notification.textContent = `The track "${trackName}" has been added to your playlist!`;
     notification.classList.add('show');
@@ -155,7 +155,7 @@ function addToPlaylist(trackName, playlistId) {
             notification.style.visibility = 'hidden';
         }, 500);
     }, 5000);
-}
+}*/
 
 function displayAlbums(albums) {
     const albumHTML = albums.map(album => `

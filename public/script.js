@@ -90,7 +90,7 @@ function startVoiceRecognition() {
     }
 }
 
-function hideProfileMenu() {
+/*function hideProfileMenu() {
     const profileMenu = document.getElementById('profileMenu');
     profileMenu.style.display = 'none';
 }
@@ -132,6 +132,6 @@ function loadStaticPlaylists() {
         li.textContent = playlist;
         playlistsList.appendChild(li);
     });
-}
+}*/
 
 voiceBtn.addEventListener('click', startVoiceRecognition);
