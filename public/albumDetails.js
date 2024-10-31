@@ -1,4 +1,4 @@
-import { getAlbumDetails } from '../controllers/spotifyController.js';
+import artistController from '../controllers/spotifyController.js';
 
 const albumNameElement = document.getElementById('albumName');
 const albumTracksContainer = document.getElementById('albumTracks');
@@ -21,7 +21,7 @@ function getAlbumIdFromUrl() {
 async function loadAlbumDetails() {
     const albumId = getAlbumIdFromUrl();
     try {
-        const albumDetails = await getAlbumDetails(albumId);
+        const albumDetails = await artistController.getAlbumDetails(albumId);
         const albumName = albumDetails.name;
         const tracks = albumDetails.tracks;
         

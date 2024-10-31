@@ -1,5 +1,5 @@
-import { handleArtistSearch } from '../controllers/spotifyController.js';
-import { displayArtists } from './artistProfile.js'
+import artistController from '../controllers/spotifyController.js';
+import { displayArtists } from './artistProfile.js';
 
 const searchBtn = document.getElementById('searchBtn');
 const searchTerm = document.getElementById('searchTerm');
@@ -11,7 +11,7 @@ searchBtn.addEventListener('click', async () => {
     const artist = searchTerm.value.trim();
     if (artist) {
         try {
-            const artists = await handleArtistSearch(artist);
+            const artists = await artistController.handleArtistSearch(artist);
             displayArtists(artists);
         } catch (error) {
             console.error('Error fetching artist:', error);
@@ -42,7 +42,7 @@ function startVoiceRecognition() {
                     });
                 },
             };
-            
+
             annyang.addCommands(commands);
             annyang.start({ autoRestart: false, continuous: true });
 
@@ -75,10 +75,10 @@ function startVoiceRecognition() {
                     searchTerm.classList.remove('listening');
                 }, 4000);
             }
-            
+
             resetInactivityTimeout();
             annyang.addCallback('start', resetInactivityTimeout);
-        
+
         } else {
             annyang.abort();
             searchTerm.classList.remove('listening');

@@ -1,4 +1,4 @@
-import { getArtistData } from '../controllers/spotifyController.js';
+import artistController from '../controllers/spotifyController.js';
 
 const artistInfoDiv = document.getElementById('artistInfo');
 const artistNameElement = document.getElementById('artistName');
@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const artistId = getArtistIdFromUrl();
     if (artistId && artistInfoDiv) {
         try {
-            const { artist, tracks, albums } = await getArtistData(artistId);
+            const { artist, tracks, albums } = await artistController.getArtistData(artistId);
             displayArtistProfile(artist);
             displayTracks(tracks);
             displayAlbums(albums);

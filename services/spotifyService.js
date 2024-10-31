@@ -52,43 +52,47 @@ async function fetchSpotifyApi(apiUrl) {
     return await response.json();
 }
 
-export async function fetchArtistProfile(artistId) {
-    const apiUrl = `https://api.spotify.com/v1/artists/${artistId}`;
-    return fetchSpotifyApi(apiUrl);
-}
+const spotifyService = {
+    fetchArtistProfile: async (artistId) => {
+        const apiUrl = `https://api.spotify.com/v1/artists/${artistId}`;
+        return fetchSpotifyApi(apiUrl);
+    },
 
-export async function fetchTopTracks(artistId) {
-    const apiUrl = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US`;
-    const data = await fetchSpotifyApi(apiUrl);
-    return data.tracks;
-}
-
-export async function fetchAlbums(artistId) {
-    const apiUrl = `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&market=US`;
-    return fetchSpotifyApi(apiUrl);
-}
-
-export async function fetchAlbumDetails(albumId) {
-    const apiUrl = `https://api.spotify.com/v1/albums/${albumId}`;
-    const albumData = await fetchSpotifyApi(apiUrl);
-    
-    const albumName = albumData.name;
-    const tracks = albumData.tracks.items;
-
-    return { name: albumName, tracks };
-}
-    
-export async function fetchArtistData(artist) {
-    const apiUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(artist)}&type=artist`;
-    try {
+    fetchTopTracks: async (artistId) => {
+        const apiUrl = `https://api.spotify.com/v1/artists/${artistId}/top-tracks?market=US`;
         const data = await fetchSpotifyApi(apiUrl);
-        const artists = data.artists.items;
-        if (!artists.length) {
-            throw new Error('No artists found!');
+        return data.tracks;
+    },
+
+    fetchAlbums: async (artistId) => {
+        const apiUrl = `https://api.spotify.com/v1/artists/${artistId}/albums?include_groups=album&market=US`;
+        return fetchSpotifyApi(apiUrl);
+    },
+
+    fetchAlbumDetails: async (albumId) => {
+        const apiUrl = `https://api.spotify.com/v1/albums/${albumId}`;
+        const albumData = await fetchSpotifyApi(apiUrl);
+        
+        const albumName = albumData.name;
+        const tracks = albumData.tracks.items;
+
+        return { name: albumName, tracks };
+    },
+
+    fetchArtistData: async (artist) => {
+        const apiUrl = `https://api.spotify.com/v1/search?q=${encodeURIComponent(artist)}&type=artist`;
+        try {
+            const data = await fetchSpotifyApi(apiUrl);
+            const artists = data.artists.items;
+            if (!artists.length) {
+                throw new Error('No artists found!');
+            }
+            return artists;
+        } catch (error) {
+            console.error('Error fetching artist data:', error.message);
+            throw new Error('Could not fetch artist data. Please try again later.');
         }
-        return artists;
-    } catch (error) {
-        console.error('Error fetching artist data:', error.message);
-        throw new Error('Could not fetch artist data. Please try again later.');
     }
-}
+};
+
+export default spotifyService;
