@@ -1,10 +1,12 @@
 import artistController from '../controllers/spotifyController.js';
+import WikipediaController from '../controllers/wikipediaController.js';
 
 const artistInfoDiv = document.getElementById('artistInfo');
 const artistNameElement = document.getElementById('artistName');
 const tracksContainer = document.getElementById('tracksContainer');
 const albumsContainer = document.getElementById('albumsContainer');
 const spotifyData = document.getElementById('spotifyData');
+const artistBioDiv = document.getElementById('artistBio');
 
 const audioPlayer = new Audio();
 let isPlaying = false;
@@ -183,6 +185,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             displayArtistProfile(artist);
             displayTracks(tracks);
             displayAlbums(albums);
+
+            /*const term = { term: artist.name };
+            const response = await WikipediaController.searchWikipedia({ query: term });
+            displayBio(response);*/
         } catch (error) {
             console.error('Error fetching artist data:', error);
             artistInfoDiv.innerHTML = '<p>Error loading artist data.</p>';
