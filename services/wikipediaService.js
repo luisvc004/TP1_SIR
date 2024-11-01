@@ -1,33 +1,29 @@
 const WikipediaService = {
     baseUrl: 'https://en.wikipedia.org/w/api.php',
 
-    fetchWikipediaData: async function(term) {
-        const url = `${this.baseUrl}?action=query&list=search&srsearch=${encodeURIComponent(term)}&utf8=&format=json&origin=*`;
-
+    fetchCompleteBiography: async function(term) {
+        const url = `${this.baseUrl}?action=query&titles=${encodeURIComponent(term)}&prop=extracts|info&explaintext&inprop=url&format=json&origin=*`;
+    
         try {
             const response = await fetch(url);
             if (!response.ok) {
-                throw new Error('Failed to fetch data from Wikipedia');
+                throw new Error('Failed to fetch complete biography from Wikipedia');
             }
+    
             const data = await response.json();
-            return data.query.search;
-        } catch (error) {
-            throw new Error('Error fetching data from Wikipedia: ' + error.message);
-        }
-    },
-
-    fetchArticleContent: async function(title) {
-        const url = `${this.baseUrl}?action=parse&page=${encodeURIComponent(title)}&format=json&origin=*`;
-
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error('Failed to fetch article content');
+            const page = Object.values(data.query.pages)[0];
+    
+            if (page && page.extract) {
+                const paragraphs = page.extract.split('\n');
+                return {
+                    firstParagraph: paragraphs[0],
+                    link: page.fullurl
+                };
+            } else {
+                throw new Error('No content found for the specified term.');
             }
-            const data = await response.json();
-            return data.parse.text['*'];
         } catch (error) {
-            throw new Error('Error fetching article content: ' + error.message);
+            throw new Error('Error fetching complete biography: ' + error.message);
         }
     }
 };

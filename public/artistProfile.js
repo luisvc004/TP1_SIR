@@ -186,9 +186,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             displayTracks(tracks);
             displayAlbums(albums);
 
-            /*const term = { term: artist.name };
-            const response = await WikipediaController.searchWikipedia({ query: term });
-            displayBio(response);*/
+            const artistName = artist.name;
+            const biographyResponse = await WikipediaController.getBiography({ query: { term: artistName }});
+            displayBio(biographyResponse);
+            
         } catch (error) {
             console.error('Error fetching artist data:', error);
             artistInfoDiv.innerHTML = '<p>Error loading artist data.</p>';
@@ -197,3 +198,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         artistInfoDiv.innerHTML = '<p>Artist ID not found.</p>';
     }
 });
+
+function displayBio(data) {
+    const biographyElement = document.getElementById('artistBio');
+    if (data && data.firstParagraph) {
+        biographyElement.innerHTML = `
+            <p>${data.firstParagraph}</p>
+            <p><a href="${data.link}" target="_blank">See More: ${data.link}</a></p>
+        `;
+    } else {
+        biographyElement.innerHTML = '<p>Biography not available.</p>';
+    }
+}
