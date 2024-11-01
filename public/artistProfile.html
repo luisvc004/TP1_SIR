@@ -5,17 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artist Profile</title>
     <link rel="stylesheet" href="styles2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container artist-profile">
         <button class="back-button" onclick="window.history.back()">Back</button>
+        
         <h2 id="artistName">Artist Name</h2>
         <div id="artistInfo" class="artist-details"></div>
-        <div id="topTracks" class="tracks">
-            <h3>Popular Songs</h3>
-            <div class="tracks-grid"></div>
+
+        <div class="bio-section">
+            <h2>Biography</h2>
+            <p id="artistBio"></p>
+        </div>
+
+        <div class="tracks-section">
+            <h2>Popular Tracks</h2>
+            <div id="tracksContainer" class="tracks-container"></div>
+        </div>
+
+        <div class="popular-albums-title">
+            <h2>Popular Albums</h2>
+            <div id="albumsContainer" class="albums-container"></div>
         </div>
     </div>
+    <div id="notification" class="notification"></div>
     <script type="module" src="artistProfile.js"></script>
 </body>
 </html>

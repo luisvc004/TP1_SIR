@@ -41,7 +41,7 @@ Ao combinar essas diferentes fontes de dados, a aplicação proporciona uma expe
 
 1. **Spotify API**: Utilizada para obter informações sobre artistas, as suas faixas populares, álbuns e *playlists*. Esta API permite o acesso a dados em tempo real sobre as tendências musicais.
 
-2. **Last.fm API**: Utilizada para obter informações, como biografia do artista, popularidade, estatísticas de audiência, e outros dados culturais, enriquecendo as informações obtidas pela API do Spotify.
+2. **Wikipedia**:
 
 3. 
 

@@ -9,23 +9,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
 </head>
 <body>
-    <div class="container">
+    <div class="container" id="mainContainer">
         <header>
             <h1>Discover Your Music Artists</h1>
             <p>Explore popular tracks, artists, and much more!</p>
         </header>
 
         <main>
+            <!--<div class="profile-section">
+                <button id="profileBtn"><i class="fas fa-user-circle"></i></button>
+                <div id="profileMenu" class="profile-menu" style="display: none;">
+                    <button id="loginBtn">Log In</button>
+                    <button id="logoutBtn">Log Out</button>
+                </div>
+            </div>-->
             <div class="search-section">
                 <input type="text" id="searchTerm" placeholder="Search for an artist..." />
                 <button id="searchBtn">Search</button>
                 <button id="voiceBtn">🎤</button>
             </div>
-
             <div id="results" class="results">
                 <div id="spotifyData"></div>
             </div>
         </main>
+    </div>
+
+    <div id="playlistsContainer" class="playlists" style="display: none;">
+        <h2>My Playlists</h2>
+        <ul id="playlistsList">
+        </ul>
     </div>
 
     <audio id="audioPlayer" controls style="display: none;"></audio>
@@ -38,4 +50,5 @@
      VER bug do rato no spotifyAPI, teclas OK
      Suposto estar sempre a requisitar tokens no Postman para o Spotify? Expiram em 1 hora
      O k conta mais no trabalho? Número de APIS implementadas ou k?
+     Ver SpotifyService, renovação do token
 -->

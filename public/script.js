@@ -1,5 +1,5 @@
-import { handleArtistSearch } from '../controllers/spotifyController.js';
-import { displayArtists } from './artistProfile.js'
+import artistController from '../controllers/spotifyController.js';
+import { displayArtists } from './artistProfile.js';
 
 const searchBtn = document.getElementById('searchBtn');
 const searchTerm = document.getElementById('searchTerm');
@@ -11,7 +11,7 @@ searchBtn.addEventListener('click', async () => {
     const artist = searchTerm.value.trim();
     if (artist) {
         try {
-            const artists = await handleArtistSearch(artist);
+            const artists = await artistController.handleArtistSearch(artist);
             displayArtists(artists);
         } catch (error) {
             console.error('Error fetching artist:', error);
@@ -42,7 +42,7 @@ function startVoiceRecognition() {
                     });
                 },
             };
-            
+
             annyang.addCommands(commands);
             annyang.start({ autoRestart: false, continuous: true });
 
@@ -75,10 +75,10 @@ function startVoiceRecognition() {
                     searchTerm.classList.remove('listening');
                 }, 4000);
             }
-            
+
             resetInactivityTimeout();
             annyang.addCallback('start', resetInactivityTimeout);
-        
+
         } else {
             annyang.abort();
             searchTerm.classList.remove('listening');
@@ -89,5 +89,49 @@ function startVoiceRecognition() {
         console.log('Annyang is not supported in this browser.');
     }
 }
+
+/*function hideProfileMenu() {
+    const profileMenu = document.getElementById('profileMenu');
+    profileMenu.style.display = 'none';
+}
+
+document.getElementById('profileBtn').addEventListener('click', function() {
+    const profileMenu = document.getElementById('profileMenu');
+    profileMenu.style.display = profileMenu.style.display === 'none' ? 'block' : 'none';
+});
+
+document.getElementById('loginBtn').addEventListener('click', function() {
+    document.getElementById('mainContainer').classList.add('moved');
+    const playlistsContainer = document.getElementById('playlistsContainer');
+    playlistsContainer.style.display = 'block';
+    loadStaticPlaylists();
+    hideProfileMenu();
+});
+
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    document.getElementById('mainContainer').classList.remove('moved');
+    const playlistsContainer = document.getElementById('playlistsContainer');
+    playlistsContainer.style.display = 'none';
+    hideProfileMenu();
+});
+
+function loadStaticPlaylists() {
+    const playlistsList = document.getElementById('playlistsList');
+    playlistsList.innerHTML = '';
+
+    const playlists = [
+        'Playlist de Verão',
+        'Top 50 Hits',
+        'Clássicos dos Anos 80',
+        'Rock dos Anos 90',
+        'Música Chill para Estudar'
+    ];
+
+    playlists.forEach(playlist => {
+        const li = document.createElement('li');
+        li.textContent = playlist;
+        playlistsList.appendChild(li);
+    });
+}*/
 
 voiceBtn.addEventListener('click', startVoiceRecognition);
